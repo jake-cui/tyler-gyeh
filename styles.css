@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.bouncing-head {
+    position: absolute;
+    border-radius: 50%;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: width 0.1s ease, height 0.1s ease;
+}
+
+#heads-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+#music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#music-toggle.playing .music-icon {
+    content: '🔊';
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(51, 51, 51, 0.4);
+    }
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(51, 51, 51, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(51, 51, 51, 0);
+    }
+}
+
+#music-toggle.pulse {
+    animation: pulse 2s infinite;
+}
