@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Secret keyword detection
+    let typedKeys = '';
+    const secretSound = document.getElementById('secret-sound');
+    
+    document.addEventListener('keydown', (e) => {
+        typedKeys += e.key.toLowerCase();
+        // Only keep the last 6 characters (length of 'peanut')
+        if (typedKeys.length > 6) {
+            typedKeys = typedKeys.slice(-6);
+        }
+        
+        if (typedKeys === 'peanut') {
+            secretSound.currentTime = 0; // Reset the sound to start
+            secretSound.play().catch(error => {
+                console.log('Secret sound playback failed:', error);
+            });
+            typedKeys = ''; // Reset the typed keys
+        }
+    });
+
     const headsContainer = document.getElementById('heads-container');
     const musicToggle = document.getElementById('music-toggle');
     const musicIcon = musicToggle.querySelector('.music-icon');
