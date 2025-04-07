@@ -50,9 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', startMusic, { once: true });
     document.addEventListener('touchstart', startMusic, { once: true });
 
-    // Music control
-    musicToggle.addEventListener('click', (e) => {
+    // Music control function
+    function toggleMusic(e) {
+        e.preventDefault(); // Prevent default behavior
         e.stopPropagation(); // Prevent creating a head when clicking the music button
+        
         if (isPlaying) {
             backgroundMusic.pause();
             musicIcon.textContent = '🔈';
@@ -64,7 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         isPlaying = !isPlaying;
         musicToggle.classList.toggle('playing');
-    });
+    }
+
+    // Add both click and touch events for music toggle
+    musicToggle.addEventListener('click', toggleMusic);
+    musicToggle.addEventListener('touchend', toggleMusic, { passive: false });
 
     class BouncingHead {
         constructor(x, y, size) {
